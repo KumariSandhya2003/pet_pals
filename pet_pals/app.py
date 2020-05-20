@@ -24,7 +24,15 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-from .models import Pet
+# from models import Pet
+class Pet(db.Model):
+    __tablename__ = 'pets'
+    __table_args__ = {'extend_existing': True}
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    lat = db.Column(db.Float)
+    lon = db.Column(db.Float)
 
 
 # create route that renders index.html template
